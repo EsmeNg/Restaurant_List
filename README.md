@@ -1,5 +1,8 @@
-## 產品模板
+# 我的餐廳清單
+這是一個供使用者收藏用的餐廳清單，記錄了所有餐廳和各餐廳的詳細資料，並打造了搜尋功能，讓使用者能快速找到特定餐廳。
 
+## 產品模板
+![ProductCover](https://github.com/EsmeNg/Restaurant_List/blob/main/restaurant_index.png?raw=true)
 ## 產品功能
 1. 使用者可瀏覽清單的所有餐廳
 2. 使用者可查看任一餐廳的詳細資料
