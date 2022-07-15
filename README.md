@@ -21,7 +21,7 @@ npm install
 
 4. 打開伺服器，執行主程式
 ```
-nodemon app.js //若顯示you're running on localhost:3000代表連接成功
+nodemon app.js   // 若顯示you're running on localhost:3000，就代表連接成功
 ```
 
 5. 打開瀏覽器，在URL輸入localhost:3000
