@@ -8,6 +8,10 @@ const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/restaurant', {useNewUrlParser: true, useUnifiedTopology: true})
 const db = mongoose.connection
 
+//  載入body-parser，接收form request的資料
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: true }))
+
 db.on('error', () => {
   console.log('mongodb error!')
 })
@@ -31,7 +35,6 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 
 //  設置路由: 餐廳清單主頁
-TODO: //根目錄要靠db render,而不是json
 app.get('/', (req, res) => {
   Restaurant.find()
   .lean()
@@ -39,11 +42,36 @@ app.get('/', (req, res) => {
   .catch(error => console.error(error))
 })
 
+//  設置路由: 創建餐廳頁面
+app.get('/restaurants/new', (req,res) => {
+  res.render('new')
+})
+
+//  設置路由: 接收新創建的餐廳資料
+app.post('/restaurants', (req,res) => {
+  const {name, enName, rating, category, phoneNumber, address, description, googleMap, image} = 
+  { name: req.body.name, enName: req.body.enName, rating: req.body.rating, 
+    category: req.body.category, phoneNumber: req.body.phoneNumber, address: req.body.address, 
+    description: req.body.description, googleMap: req.body.googleMap, image: req.body.image
+  }
+  //console.log(name, enName, rating, category, phoneNumber, address, description, googleMap, image)
+  return Restaurant.create({name, enName, rating, category, phoneNumber, address, description, googleMap, image})
+  .then(() => res.redirect('/'))
+  .catch(error => console.error(error))
+})
+
+
 //  設置路由: 各餐廳詳細資料
 //TODO:去db找而不是json
-app.get('/restaurants/:restaurant_id', (req, res) => {
-  const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-  res.render('show', { restaurant, style: 'show.css' })
+app.get('/restaurants/:id', (req, res) => {
+  //const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
+  const id = req.params.id
+  return Restaurant.findById(id)
+  .lean()
+  .then(restaurant => res.render('show', { restaurant, style: 'show.css' }))
+  .catch(error => console.error(error))
+  //const id = req.params.id
+  //res.render('show', { restaurant, style: 'show.css' })
 })
 
 //  設置路由: 用戶搜尋餐龐的結果

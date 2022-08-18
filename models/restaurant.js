@@ -2,14 +2,15 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const restaurantSchema = new Schema ({
-    id: Number,
     name: String,
-    name_en: String,
+    enName: String,
     category: String,
     image: String,
-    google_map: String,
+    googleMap: String,
     rating: Number,
-    description: String
+    description: String,
+    phoneNumber: String,
+    address: String
 })
 
 module.exports = mongoose.model('Restaurant', restaurantSchema)
