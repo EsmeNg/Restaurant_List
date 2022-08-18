@@ -16,7 +16,7 @@
           <i class="fas fa-map-marker-alt pr-2"></i>
           地址：
         </span>
-        {{restaurant.location}}
+        {{restaurant.address}}
         <a href="https://goo.gl/maps/V9mKwVJ4s5v" class="text-secondary" target="_blank">
           <i class="fas fa-location-arrow pr-2 fa-xs"></i>
         </a>
@@ -27,7 +27,7 @@
           <i class="fas fa-mobile-alt pr-2"></i>
           電話：
         </span>
-        {{restaurant.phone}}
+        {{restaurant.phoneNumber}}
       </p>
 
       <p class="mb-5">
@@ -35,6 +35,10 @@
       </p>
 
       <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}" style="max-width: 600px;">
+      <div class="d-flex justify-content-end mb-4">
+              <a class="btn btn-outline-success btn-sm mx-1" href="./{{ restaurant._id }}/edit" role="button">修改</a>
+              <a class="btn btn-outline-secondary btn-sm" href="./restaurants/new" role="button">刪除</a>
+            </div>
     </div>
   </div>
 </div>

@@ -28,6 +28,7 @@ const Restaurant = require('./models/restaurant')
 
 //  樣板引擎的基本設置
 const exphbs = require('express-handlebars')
+const { findById } = require('./models/restaurant')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
@@ -49,12 +50,7 @@ app.get('/restaurants/new', (req,res) => {
 
 //  設置路由: 接收新創建的餐廳資料
 app.post('/restaurants', (req,res) => {
-  const {name, enName, rating, category, phoneNumber, address, description, googleMap, image} = 
-  { name: req.body.name, enName: req.body.enName, rating: req.body.rating, 
-    category: req.body.category, phoneNumber: req.body.phoneNumber, address: req.body.address, 
-    description: req.body.description, googleMap: req.body.googleMap, image: req.body.image
-  }
-  //console.log(name, enName, rating, category, phoneNumber, address, description, googleMap, image)
+  const {name, enName, rating, category, phoneNumber, address, description, googleMap, image} = req.body
   return Restaurant.create({name, enName, rating, category, phoneNumber, address, description, googleMap, image})
   .then(() => res.redirect('/'))
   .catch(error => console.error(error))
@@ -62,16 +58,41 @@ app.post('/restaurants', (req,res) => {
 
 
 //  設置路由: 各餐廳詳細資料
-//TODO:去db找而不是json
 app.get('/restaurants/:id', (req, res) => {
-  //const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
   const id = req.params.id
   return Restaurant.findById(id)
   .lean()
   .then(restaurant => res.render('show', { restaurant, style: 'show.css' }))
   .catch(error => console.error(error))
-  //const id = req.params.id
-  //res.render('show', { restaurant, style: 'show.css' })
+})
+
+//  設置路由: 修改各餐廳資料的頁面
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+  .lean()
+  .then(restaurant => res.render('edit', {restaurant}))
+})
+
+
+//  設置路由: 接收修改後的餐廳資料
+app.post('/restaurants/:id/edit', (req,res) => {
+  const id = req.params.id
+  const {name, enName, rating, category, phoneNumber, address, description, googleMap, image} = req.body
+  return Restaurant.findById(id)
+  .then(restaurant => {
+    restaurant.name = name
+    restaurant.enName = enName
+    restaurant.rating = rating
+    restaurant.phoneNumber = phoneNumber
+    restaurant.address = address
+    restaurant.description = description
+    restaurant.googleMap = googleMap
+    restaurant.image = image
+    return restaurant.save()
+  })
+  .then(() => res.redirect(`/restaurants/${id}`))
+  .catch(error => console.error(error))
 })
 
 //  設置路由: 用戶搜尋餐龐的結果
