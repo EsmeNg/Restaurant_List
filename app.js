@@ -3,8 +3,24 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-//  載入resaurant清單
-const restaurantList = require('./restaurant.json')
+//  mongoose的基本設置及與資料庫伺服器連線
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/restaurant', {useNewUrlParser: true, useUnifiedTopology: true})
+const db = mongoose.connection
+
+db.on('error', () => {
+  console.log('mongodb error!')
+})
+
+db.once('open', () => {
+  console.log('mongodb connected!')
+})
+
+//////////////待修理,等等把它拿掉  載入resaurant清單///////////////////////////
+const restaurantList = require('./public/mydata/restaurant.json')
+
+// 把Restaurant Model的資料引進樣板
+const Restaurant = require('./models/restaurant')
 
 //  樣板引擎的基本設置
 const exphbs = require('express-handlebars')
@@ -15,11 +31,16 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 
 //  設置路由: 餐廳清單主頁
+TODO: //根目錄要靠db render,而不是json
 app.get('/', (req, res) => {
-  res.render('index', { restaurants: restaurantList.results, style: 'index.css' })
+  Restaurant.find()
+  .lean()
+  .then(restaurants => res.render('index', { restaurants, style: 'index.css' }))
+  .catch(error => console.error(error))
 })
 
 //  設置路由: 各餐廳詳細資料
+//TODO:去db找而不是json
 app.get('/restaurants/:restaurant_id', (req, res) => {
   const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
   res.render('show', { restaurant, style: 'show.css' })
