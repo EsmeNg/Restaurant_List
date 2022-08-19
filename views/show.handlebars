@@ -37,7 +37,9 @@
       <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}" style="max-width: 600px;">
       <div class="d-flex justify-content-end mb-4">
               <a class="btn btn-outline-success btn-sm mx-1" href="./{{ restaurant._id }}/edit" role="button">修改</a>
-              <a class="btn btn-outline-secondary btn-sm" href="./restaurants/new" role="button">刪除</a>
+              <form action="/restaurants/{{ restaurant._id }}/delete" method="POST">
+                <button class="btn btn-outline-secondary btn-sm" type="submit">刪除</button>
+              </form>
             </div>
     </div>
   </div>

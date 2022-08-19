@@ -38,7 +38,9 @@
             <div class="card-footer d-flex justify-content-end">
               <a class="btn btn-outline-info btn-sm" href="./restaurants/{{ this._id }}" role="button">詳情</a>
               <a class="btn btn-outline-success btn-sm mx-1" href="./restaurants/{{ this._id }}/edit" role="button">修改</a>
-              <a class="btn btn-outline-secondary btn-sm" href="./restaurants/new" role="button">刪除</a>
+              <form action="../restaurants/{{ this._id }}/delete" method="POST">
+                <button class="btn btn-outline-secondary btn-sm" type="submit">刪除</button>
+              </form>
             </div>
           </div>
         </a>
