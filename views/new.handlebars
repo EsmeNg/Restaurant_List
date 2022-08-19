@@ -1,35 +1,51 @@
-<h1>創建餐廳</h1>
-<form action="/restaurants" method="POST">
+<div class="form-wrapper">
+  <form action="/restaurants" method="POST"> 
+    <div class="row">
+      <p>餐廳資訊</p>
+    </div>
+    <div class="row">
+      <label for="name">餐廳名稱</label>
+      <input type="text" name="name" id="name">
+    </div>
+    <div class="row">
+      <label for="enName">餐廳英文名稱</label>
+      <input type="text" name="enName" id="enName">
+    </div>
+    <div class="row">
+      <label for="rating">餐廳評分</label>
+      <input type="text" name="rating" id="rating">
+    </div>
+    <div class="row">
+      <label for="category">餐廳類型</label>
+      <input type="text" name="category" id="category">  
+    </div>
+    <div class="row">
+      <label for="phoneNumber">餐廳電話號碼</label>
+      <input type="text" name="phoneNumber" id="phoneNumber">      
+    </div>
+    <div class="row">
+      <label for="address">餐廳地址</label>
+      <input type="text" name="address" id="address">
+    </div>
 
-<label for="name">餐廳名稱</label>
-<input type="text" name="name" id="name">
+    <div class="row">
+       <label for="description" class="form-label">餐廳特色</label>
+       <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+      </div> 
+     </div>
 
-<label for="enName">餐廳英文名稱</label>
-<input type="text" name="enName" id="enName">
-
-<label for="rating">餐廳評分</label>
-<input type="text" name="rating" id="rating">
-
-<label for="category">餐廳類型</label>
-<input type="text" name="category" id="category">
-
-<label for="phoneNumber">餐廳電話號碼</label>
-<input type="text" name="phoneNumber" id="phoneNumber">
-
-<label for="address">餐廳地址</label>
-<input type="text" name="address" id="address">
-
-<div class="mb-3">
-  <label for="description" class="form-label">請你描述這家餐廳的特色（食物類型、氛圍、印象）</label>
-  <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+    <div class="row">
+      <label for="googleMap">地圖位置</label>
+      <input type="text" name="googleMap" id="googleMap">
+    </div>
+    
+    <div class="row">
+      <label for="image" class="form-label image-label">上載餐廳圖片</label>
+      <input class="form-control" type="file" name="image" id="image">
+      <img id="output">
+    </div>
+    <div class="row">
+        <button class="btn btn-outline-success" type="submit" role="button">建立餐廳</button>
+    </div>
+  </form>
 </div>
-
-<label for="googleMap">Google地圖位置</label>
-<input type="text" name="googleMap" id="googleMap">
-
-<div class="mb-3">
-  <label for="image" class="form-label">上載一家餐廳的圖片</label>
-  <input class="form-control" type="file" name="image" id="image">
-</div>
-<button class="btn btn-outline-success" type="submit" role="button">建立餐廳</button>
-</form>

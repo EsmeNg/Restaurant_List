@@ -18,10 +18,9 @@
 <label for="address">餐廳地址</label>
 <input type="text" name="address" id="address" value="{{ restaurant.address }}">
 
-{{!-- TEXTVALUE的使用者體驗待處理 --}}
 <div class="mb-3">
   <label for="description" class="form-label">請你描述這家餐廳的特色（食物類型、氛圍、印象）</label>
-  <textarea class="form-control" name="description" id="description" rows="3" value="{{ restaurant.description }}"></textarea>
+  <textarea class="form-control" name="description" id="description" rows="3">{{ restaurant.description }}</textarea>
 </div>
 
 <label for="googleMap">Google地圖位置</label>

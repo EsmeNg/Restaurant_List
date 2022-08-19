@@ -20,9 +20,6 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
-//////////////待修理,等等把它拿掉  載入resaurant清單///////////////////////////
-const restaurantList = require('./public/mydata/restaurant.json')
-
 // 把Restaurant Model的資料引進樣板
 const Restaurant = require('./models/restaurant')
 
@@ -45,13 +42,13 @@ app.get('/', (req, res) => {
 
 //  設置路由: 創建餐廳頁面
 app.get('/restaurants/new', (req,res) => {
-  res.render('new')
+  res.render('new', { style: 'new.css' })
 })
 
 //  設置路由: 接收新創建的餐廳資料
 app.post('/restaurants', (req,res) => {
-  const {name, enName, rating, category, phoneNumber, address, description, googleMap, image} = req.body
-  return Restaurant.create({name, enName, rating, category, phoneNumber, address, description, googleMap, image})
+  /*const {name, enName, rating, category, phoneNumber, address, description, googleMap, image} = req.body*/
+  return Restaurant.create(req.body)
   .then(() => res.redirect('/'))
   .catch(error => console.error(error))
 })
@@ -81,14 +78,15 @@ app.post('/restaurants/:id/edit', (req,res) => {
   const {name, enName, rating, category, phoneNumber, address, description, googleMap, image} = req.body
   return Restaurant.findById(id)
   .then(restaurant => {
-    restaurant.name = name
-    restaurant.enName = enName
-    restaurant.rating = rating
-    restaurant.phoneNumber = phoneNumber
-    restaurant.address = address
-    restaurant.description = description
-    restaurant.googleMap = googleMap
-    restaurant.image = image
+    // restaurant.name = name
+    // restaurant.enName = enName
+    // restaurant.rating = rating
+    // restaurant.phoneNumber = phoneNumber
+    // restaurant.address = address
+    // restaurant.description = description
+    // restaurant.googleMap = googleMap
+    // restaurant.image = image
+    restaurant = Object.assign(restaurant, req.body)
     return restaurant.save()
   })
   .then(() => res.redirect(`/restaurants/${id}`))
@@ -103,8 +101,6 @@ app.post('/restaurants/:id/delete', (req, res) => {
   .then(() => res.redirect('/'))
   .catch(error => console.error(error))
 })
-
-
 
 //  設置路由: 用戶搜尋餐龐的結果
 app.get('/search', (req, res) => {

@@ -1,0 +1,30 @@
+.form-wrapper {
+    font-weight: 800;
+}
+p {
+    margin: 10px 0 0 0;
+    font-weight: 800;
+}
+.row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+.row > label {
+    width: 120px;
+}
+.row textarea {
+    width: 190px;
+    border-color: black;
+}
+
+.image-label {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.image-label:hover {
+    color: rgb(63, 96, 204);
+}
+.row input[type='file']{
+    display: none;
+}
