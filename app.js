@@ -25,8 +25,6 @@ const Restaurant = require('./models/restaurant')
 
 //  樣板引擎的基本設置
 const exphbs = require('express-handlebars')
-const { findById } = require('./models/restaurant')
-const restaurant = require('./models/restaurant')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
@@ -42,7 +40,7 @@ app.get('/', (req, res) => {
 })
 
 //  設置路由: 創建餐廳頁面
-app.get('/restaurants/new', (req,res) => {
+app.get('/restaurants/new', (req, res) => {
   res.render('new', { style: 'newandedit.css' })
 })
 
@@ -76,7 +74,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
 //  設置路由: 接收修改後的餐廳資料
 app.post('/restaurants/:id/edit', (req,res) => {
   const id = req.params.id
-  const {name, enName, rating, category, phoneNumber, address, description, googleMap, image} = req.body
+  //const {name, enName, rating, category, phoneNumber, address, description, googleMap, image} = req.body
   return Restaurant.findById(id)
   .then(restaurant => {
     // restaurant.name = name
@@ -103,7 +101,6 @@ app.post('/restaurants/:id/delete', (req, res) => {
   .catch(error => console.error(error))
 })
 
-FIXME:
 //  設置路由: 用戶搜尋餐龐的結果
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim()
