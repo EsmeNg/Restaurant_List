@@ -26,6 +26,7 @@ const Restaurant = require('./models/restaurant')
 //  樣板引擎的基本設置
 const exphbs = require('express-handlebars')
 const { findById } = require('./models/restaurant')
+const restaurant = require('./models/restaurant')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
@@ -42,7 +43,7 @@ app.get('/', (req, res) => {
 
 //  設置路由: 創建餐廳頁面
 app.get('/restaurants/new', (req,res) => {
-  res.render('new', { style: 'new.css' })
+  res.render('new', { style: 'newandedit.css' })
 })
 
 //  設置路由: 接收新創建的餐廳資料
@@ -68,7 +69,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
   .lean()
-  .then(restaurant => res.render('edit', {restaurant}))
+  .then(restaurant => res.render('edit', {restaurant, style: 'newandedit.css' }))
 })
 
 
@@ -102,12 +103,16 @@ app.post('/restaurants/:id/delete', (req, res) => {
   .catch(error => console.error(error))
 })
 
+FIXME:
 //  設置路由: 用戶搜尋餐龐的結果
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim()
-  const restaurants = restaurantList.results.filter(restaurant => restaurant.name.toLowerCase().includes(req.query.keyword.trim().toLowerCase()) || restaurant.name_en.toLowerCase().includes(req.query.keyword.trim().toLowerCase()) || restaurant.category.includes(req.query.keyword.trim())) 
-  const noSearchResult = restaurants.length? 0 : 1
-  res.render('index', { keyword, restaurants, noSearchResult, style: 'index.css' })
+  return Restaurant.find({ name: {$regex: keyword, $options: 'i' }})
+  .lean()
+  .then( restaurants => {
+    const noSearchResult = restaurants.length? 0 : 1
+    res.render('index', { keyword, restaurants,noSearchResult, style: 'index.css' })
+  })
 })
 
 //  監聽瀏覽器與伺服器的連結情形
