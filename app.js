@@ -35,13 +35,9 @@ app.set('view engine', 'handlebars')
 //  指定靜態資料位置
 app.use(express.static('public'))
 
-//  設置路由: 餐廳清單主頁
-app.get('/', (req, res) => {
-  Restaurant.find()
-  .lean()
-  .then(restaurants => res.render('index', { restaurants, style: 'index.css' }))
-  .catch(error => console.error(error))
-})
+//  告訴express收到請求後到這裡找路由
+const routes = require('./routes')
+app.use(routes)
 
 //  設置路由: 創建餐廳頁面
 app.get('/restaurants/new', (req, res) => {
