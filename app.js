@@ -3,10 +3,8 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-//  mongoose的基本設置及與資料庫伺服器連線
-const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/restaurant', {useNewUrlParser: true, useUnifiedTopology: true})
-const db = mongoose.connection
+//  載入mongoose
+require('./config/mongoose')
 
 //  載入body-parser，接收form request的資料
 const bodyParser = require('body-parser')
@@ -15,14 +13,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 //  載入method-override
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
-
-db.on('error', () => {
-  console.log('mongodb error!')
-})
-
-db.once('open', () => {
-  console.log('mongodb connected!')
-})
 
 // 把Restaurant Model的資料引進樣板
 const Restaurant = require('./models/restaurant')
