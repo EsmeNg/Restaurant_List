@@ -12,6 +12,10 @@ const db = mongoose.connection
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 
+//  載入method-override
+const methodOverride = require('method-override')
+app.use(methodOverride('_method'))
+
 db.on('error', () => {
   console.log('mongodb error!')
 })
@@ -70,9 +74,8 @@ app.get('/restaurants/:id/edit', (req, res) => {
   .then(restaurant => res.render('edit', {restaurant, style: 'newandedit.css' }))
 })
 
-
 //  設置路由: 接收修改後的餐廳資料
-app.post('/restaurants/:id/edit', (req,res) => {
+app.put('/restaurants/:id', (req,res) => {
   const id = req.params.id
   //const {name, enName, rating, category, phoneNumber, address, description, googleMap, image} = req.body
   return Restaurant.findById(id)
@@ -93,7 +96,7 @@ app.post('/restaurants/:id/edit', (req,res) => {
 })
 
 //  設置路由: 刪除餐廳資料
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
   .then(restaurant => restaurant.remove())
