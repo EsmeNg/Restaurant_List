@@ -15,6 +15,14 @@
   </div>
 </div>
 
+<form action="/sort" method="POST">
+  <select name="filter_option" onchange=submit()>
+    {{#each sortList}}
+    <option value="{{this.value}}" {{#if this.isSelect}}selected{{/if}} >{{this.text}}</option> 
+    {{/each}}
+  </select>
+</form>
+
 <!-- restaurant list -->
 <div class="container mt-5">
   <div class="row">
