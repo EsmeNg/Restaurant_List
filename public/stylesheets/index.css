@@ -14,7 +14,7 @@ header {
     color: #226089;
   }
   
-  .function-type-wrapper {
+  .form-wrapper {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
