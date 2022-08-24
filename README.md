@@ -1,12 +1,13 @@
 # 我的餐廳清單
-這是一個供使用者收藏用的餐廳清單，記錄了所有餐廳和各餐廳的詳細資料，並打造了搜尋功能，讓使用者能快速找到特定餐廳。
+這是一個供使用者收藏用的餐廳清單，記錄了所有餐廳和各餐廳的詳細資料，使用者可以搜尋、分類餐廳，也可以自行創建新的餐廳。
 
 ## 產品模板
 ![ProductCover](https://github.com/EsmeNg/Restaurant_List/blob/ef9e6a8ef2074b88bfff965cb2de0311d7ee26ce/public/mydata/restaurant_list_cover.png)
 ## 產品功能
-1. 使用者可瀏覽清單的所有餐廳
-2. 使用者可查看任一餐廳的詳細資料
-3. 使用者可用餐廳中英文名字、類別作關鍵字，來尋找餐廳
+1. 使用者可瀏覽所有餐廳
+2. 使用者可創建、查看、修改、刪除一筆餐廳資料
+3. 使用者可用餐廳名字來尋找餐廳
+4. 使用者可以使用餐廳排列功能
 
 ## 環境建置
 1. 打開終端機，複製下列程式碼，將專案clone至本機電腦
@@ -19,7 +20,7 @@ git clone https://github.com/EsmeNg/Restaurant_List.git
 cd
 ```
 
-3. 下載npm套件，包括express、handlebars、body-parser和mongoose
+3. 下載npm套件，包括express、handlebars、body-parser、method-override和mongoose
 ```
 npm install
 ```
