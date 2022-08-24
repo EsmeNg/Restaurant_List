@@ -19,14 +19,19 @@ git clone https://github.com/EsmeNg/Restaurant_List.git
 cd
 ```
 
-3. 下載npm套件，包括express和handlebars
+3. 下載npm套件，包括express、handlebars、body-parser和mongoose
 ```
 npm install
 ```
 
-4. 打開伺服器，執行主程式
+4. 注入種子資料
+```
+npm run seed
+```
+
+5. 打開伺服器，執行主程式
 ```
 nodemon app.js   // 若顯示you're running on localhost:3000，就代表連接成功
 ```
 
-5. 打開瀏覽器，在URL輸入localhost:3000
+6. 打開瀏覽器，在URL輸入localhost:3000
