@@ -14,9 +14,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 
-// 把Restaurant Model的資料引進樣板
-const Restaurant = require('./models/restaurant')
-
 //  樣板引擎的基本設置
 const exphbs = require('express-handlebars')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))

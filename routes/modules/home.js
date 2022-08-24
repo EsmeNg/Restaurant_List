@@ -2,36 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const Restaurant = require('../../models/restaurant')
-//const sortList = require('../../public/mydata/sortList')
-
-
-///////   資料最好整理到別處   ////////
-const sortList = {
-  type1 : {
-      text: 'A-Z',
-      value: 'ascending',
-      sortMethod: { name : 'asc'},
-      isSelect: true
-  }, 
-  type2 : {
-      text: 'Z-A',
-      value: 'descending',
-      sortMethod: {name : 'desc'},
-      isSelect: false
-  },
-  type3 : {
-      text: '種類',
-      value: 'category',
-      sortMethod: {category : 'asc'},
-      isSelect: false
-  },
-  type4 : {
-      text: '地區',
-      value: 'address',
-      sortMethod: {rating : 'asc'},
-      isSelect: false
-  }
-}
+const sortList = require('../../public/mydata/sortlist')
 
 //  設置路由: 餐廳清單主頁
 router.get('/', (req, res) => {

@@ -21,3 +21,4 @@ const sortList = {
     }
 }
 
+module.exports = sortList
